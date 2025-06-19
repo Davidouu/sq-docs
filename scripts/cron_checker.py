@@ -7,6 +7,6 @@ if __name__ == "__main__":
 
     checker = CheckCommits(
         repo_root=repo_root,
-        output_root=repo_root,     # sites_<module> dans la racine
+        output_root=repo_root,
     )
     checker.run()
