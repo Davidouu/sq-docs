@@ -5,7 +5,7 @@ title: Overview, Configuration & Interface
 
 ## Présentation du module
 
-**Ceci est un test.** Le module de Gestion des attributs de produit de Solusquare Commerce Cloud permet de définir et organiser les caractéristiques des produits vendus sur la plateforme. Il offre la possibilité de créer des typologies d'attributs, c’est-à-dire des groupes d’attributs, et de les associer aux différents types de produits. Cette organisation facilite la gestion cohérente et multilingue des informations produits, indispensables pour une présentation claire et adaptée aux marchés ciblés.
+**Ceci est un testttt.** Le module de Gestion des attributs de produit de Solusquare Commerce Cloud permet de définir et organiser les caractéristiques des produits vendus sur la plateforme. Il offre la possibilité de créer des typologies d'attributs, c’est-à-dire des groupes d’attributs, et de les associer aux différents types de produits. Cette organisation facilite la gestion cohérente et multilingue des informations produits, indispensables pour une présentation claire et adaptée aux marchés ciblés.
 
 Ce module est particulièrement utile pour enrichir les fiches produits avec des données spécifiques comme la couleur, la taille, ou tout autre critère pertinent. Il permet également de gérer des options d’attributs, notamment les couleurs avec leurs codes spécifiques, et d’utiliser ces attributs comme filtres dans les recherches produits. Ainsi, il contribue à améliorer l’expérience utilisateur et la pertinence des résultats dans le catalogue.
 
