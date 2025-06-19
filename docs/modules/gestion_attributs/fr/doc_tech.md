@@ -1,3 +1,7 @@
+---
+title: "Test2"
+---
+
 # Documentation technique
 
 ## Glossaire métier

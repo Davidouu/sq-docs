@@ -1,0 +1,19 @@
+backend:
+  name: github
+  repo: Davidouu/sq-docs
+  branch: master
+
+media_folder: "docs/assets"
+public_folder: "/assets"
+
+collections:
+  - name: "modules"
+    label: "Modules"          # 1 seul bloc “Modules” dans l’admin
+    folder: "docs/modules"    # racine de tous tes .md
+    create: false
+    format: "frontmatter"
+    nested:                   # ← active l’explorateur hiérarchique
+      depth: 3                # module / langue / fichier
+    fields:
+      - { name: title, label: "Titre", widget: string }
+      - { name: body,  label: "Contenu", widget: markdown }

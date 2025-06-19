@@ -1,3 +1,7 @@
+---
+title: "Test3"
+---
+
 # Gestion des attributs de produit
 
 Ce module permet de créer, gérer et associer des attributs produits multilingues aux types de produits, incluant la gestion avancée des options, couleurs et filtres dans Solusquare Commerce Cloud.
