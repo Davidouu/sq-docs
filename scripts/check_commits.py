@@ -69,7 +69,9 @@ class CheckCommits:
     def run(self) -> None:
         """Main entry point: detect changed modules, rebuild them, update SHA."""
         self._git("fetch", "origin")
-        head_sha = self._git("rev-parse", "origin/master").strip()   # <- adapte main/master
+        self._git("pull", "--ff-only", "origin", "master")
+
+        head_sha = self._git("rev-parse", "HEAD").strip()
         prev_sha = self._read_prev_sha()
 
         print(prev_sha, head_sha)
@@ -117,18 +119,23 @@ class CheckCommits:
 
     def _git(self, *args: str) -> str:
         return subprocess.check_output(["git", *args], cwd=self.repo_root, text=True)
-
-    def _changed_modules(self, prev_sha: str, head_sha: str) -> Set[str]:
-        """Return a set of module names that have .md changes in docs/modules."""
+    
+    def _changed_modules(self, prev_sha: str, head_sha: str) -> set[str]:
         diff_range = f"{prev_sha}..{head_sha}" if prev_sha else head_sha
-        output = self._git(
-            "diff", "--name-only", diff_range, "--", "docs/modules/**/*.md"
-        )
-        paths = [p for p in output.splitlines() if p]
-        modules: Set[str] = set()
-        for p in paths:
-            parts = Path(p).parts
-            # docs / modules / <module> / <lang> / file.md
-            if len(parts) >= 3 and parts[0] == "docs" and parts[1] == "modules":
-                modules.add(parts[2])
+
+        # --- DEBUG ----------------------------------------------------------
+        print(f"🔎 Diff range = {diff_range}")
+        raw = self._git("diff", "--name-only", f"{prev_sha}..{head_sha}", "--", "docs/modules")
+        print("🔎 git diff output:")
+        print(raw or "   (vide)")
+        # -------------------------------------------------------------------
+
+        modules = set()
+        for path in raw.splitlines():
+            if path.lower().endswith(".md"):
+                parts = Path(path.replace('\\', '/')).parts
+                if len(parts) >= 3 and parts[0:2] == ("docs", "modules"):
+                    modules.add(parts[2])
+
+        print(f"🔎 Modules détectés = {modules or 'aucun'}")
         return modules
