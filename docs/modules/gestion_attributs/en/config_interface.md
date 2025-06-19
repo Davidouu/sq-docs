@@ -5,7 +5,7 @@ title: Overview, Configuration & Interface
 
 ## Module Overview
 
-The Prodgtgtgtgtuct Attribute Management module of Solusquare Commerce Cloud allows defining and organizing the characteristics of products sold on the platform. It offers the ability to create attribute typologies, i.e., groups of attributes, and associate them with different product types. This organization facilitates consistent and multilingual management of product information, essential for clear presentation adapted to targeted markets.
+The Product Attribute Management module of Solusquare Commerce Cloud allows defining and organizing the characteristics of products sold on the platform. It offers the ability to create attribute typologies, i.e., groups of attributes, and associate them with different product types. This organization facilitates consistent and multilingual management of product information, essential for clear presentation adapted to targeted markets.
 
 This module is particularly useful for enriching product sheets with specific data such as color, size, or any other relevant criteria. It also allows managing attribute options, notably colors with their specific codes, and using these attributes as filters in product searches. Thus, it helps improve the user experience and the relevance of results in the catalog.
 
