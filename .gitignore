@@ -1,3 +1,5 @@
 # --- MkDocs builds ---
 site_*/
 /index.html
+__pycache__
+.last_build

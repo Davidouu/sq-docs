@@ -8,8 +8,8 @@ public_folder: "/assets"
 
 collections:
   - name: "modules"
-    label: "Modules"          # 1 seul bloc “Modules” dans l’admin
-    folder: "docs/modules"    # racine de tous tes .md
+    label: "Modules"
+    folder: "docs/modules"
     create: false
     format: "frontmatter"
     nested:
