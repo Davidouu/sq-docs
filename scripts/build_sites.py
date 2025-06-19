@@ -89,14 +89,22 @@ class BuildSite:
             "site_dir": str(self.site_dir),
             "theme": {"name": "material"},
             "plugins": [
-                "search",  # plugin builtin Material (sans opt avancées)
+                {
+                    'search': {
+                        'lang': ['fr', 'en', 'es'],
+                        'separator': r'[\s\-]+',
+                        'prebuild_index': True,
+                        'include_html': True
+                    }
+                },
                 {
                     "i18n": {
                         "default_language": "fr",
-                        "languages": {
-                            code: {"name": code.upper(), "build": True}
-                            for code in self.languages
-                        },
+                        "languages": [
+                            {'locale': 'fr', 'name': 'Français', 'default': True, 'build': True},
+                            {'locale': 'en', 'name': 'English', 'build': True},
+                            {'locale': 'es', 'name': 'Español', 'build': True}
+                        ]
                     }
                 },
             ],
