@@ -14,7 +14,7 @@ collections:
     format: "frontmatter"
     nested:
       depth: 3
-      index_file: ""
+      index_file: false
     fields:
       - { name: title, label: "Titre", widget: string }
       - { name: body,  label: "Contenu", widget: markdown }
