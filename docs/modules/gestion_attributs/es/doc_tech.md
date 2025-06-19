@@ -1,3 +1,7 @@
+---
+title: "Documentación técnica"
+---
+
 # Documentación técnica
 
 ## Glosario de negocio

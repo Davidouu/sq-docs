@@ -1,5 +1,5 @@
 ---
-title: "Test2"
+title: "Documentation technique"
 ---
 
 # Documentation technique

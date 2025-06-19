@@ -1,3 +1,7 @@
+---
+title: "Troubleshooting & faq"
+---
+
 # Troubleshooting & faq
 
 ## Errores comunes: causas y soluciones

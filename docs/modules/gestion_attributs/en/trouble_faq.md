@@ -1,3 +1,7 @@
+---
+title: "TroubleShooting & faq"
+---
+
 # TroubleShooting & faq
 
 ## Common Errors: Causes and Solutions

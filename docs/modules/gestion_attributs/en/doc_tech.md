@@ -1,3 +1,7 @@
+---
+title: "Technical Documentation"
+---
+
 # Technical Documentation
 
 ## Business Glossary

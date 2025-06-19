@@ -1,3 +1,7 @@
+---
+title: "Overview, Configuration & Interface"
+---
+
 # Overview, Configuration & Interface
 
 ## Module Overview

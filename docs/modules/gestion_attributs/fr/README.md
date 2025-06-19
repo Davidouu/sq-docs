@@ -1,5 +1,5 @@
 ---
-title: "Test3"
+title: "Index"
 ---
 
 # Gestion des attributs de produit

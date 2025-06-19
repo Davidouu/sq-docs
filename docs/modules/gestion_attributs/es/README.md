@@ -1,3 +1,7 @@
+---
+title: "index"
+---
+
 # Gestión de atributos de producto
 
 Este módulo permite crear, gestionar y asociar atributos de producto multilingües a los tipos de producto, incluyendo la gestión avanzada de opciones, colores y filtros en Solusquare Commerce Cloud.
