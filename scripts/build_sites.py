@@ -1,21 +1,11 @@
-"""build_site.py – v3
+"""build_site.py – v4
 
-Construit un sous‑site MkDocs multilingue **sans rien laisser traîner** :
-• crée un répertoire temporaire `.build_<module>/` (hors dépôt) ;
-• y copie les fichiers FR à la racine + suffixe `.en.md`, `.es.md`… ;
-• écrit un `mkdocs.yml` dans ce même tmp ;
-• exécute `mkdocs build` pour produire `site_<module>/` à la racine ;
-• nettoie entièrement le dossier temporaire à la fin.
+Cette version corrige la configuration des plugins :
+* **search** → options autorisées par MkDocs‑Material 9.x (`separator` ≠ supporté).
+* **i18n** → syntaxe du plugin *mkdocs‑static‑i18n* (`default_language` → `default_language`, mais `languages` doit être un **mapping** `{code: {name: …}}`).
 
-La structure générée dans `site_<module>/` est celle que tu avais avant :
-│ 404.html
-│ index.html              ← page FR (langue par défaut)
-├─ en/
-├─ es/
-└─ assets/
-
-Le dépôt ne contient donc : **aucun mkdocs.yml** supplémentaire, **aucun
-fichier copié**.
+Aucun fichier persistant ; build strict dans un dossier temp puis sortie dans
+`site_<module>/`.
 """
 from __future__ import annotations
 
@@ -29,7 +19,6 @@ import yaml
 
 __all__ = ["BuildSite", "BuildSiteError"]
 
-# ---------------------------------------------------------------------------
 DEFAULT_MD_FILES = [
     "index.md",
     "doc_tech.md",
@@ -39,11 +28,11 @@ DEFAULT_MD_FILES = [
 
 
 class BuildSiteError(RuntimeError):
-    """Erreur levée lorsque `mkdocs build` échoue."""
+    """Exception propagée si `mkdocs build` échoue."""
 
 
 class BuildSite:
-    """Build MkDocs pour un module sans laisser de fichiers auxiliaires."""
+    """Génère un sous‑site MkDocs multilingue sans résidu."""
 
     def __init__(
         self,
@@ -65,65 +54,49 @@ class BuildSite:
         self.site_dir = self.output_root / f"site_{self.module}"
 
     # ------------------------------------------------------------------
-    def run(self) -> None:  # noqa: D401
-        """Pipeline complet : copy → mkdocs.yml → build → cleanup."""
+    def run(self) -> None:
+        """Copie → mkdocs.yml temp → build → clean."""
         with tempfile.TemporaryDirectory(dir=self.output_root) as tmp:
             tmp_path = Path(tmp)
             docs_dir = tmp_path / "docs"
-            docs_dir.mkdir(parents=True, exist_ok=True)
-
+            docs_dir.mkdir()
             self._copy_markdown(docs_dir)
+
             mkcfg = tmp_path / "mkdocs.yml"
-            self._write_mkdocs_yml(mkcfg, docs_dir)
+            mkcfg.write_text(self._mkdocs_config(docs_dir), encoding="utf-8")
             self._mkdocs_build(mkcfg)
             print(f"✅ {self.module}: site généré dans {self.site_dir}")
-        # tmp dir supprimé automatiquement
 
     # ------------------------------------------------------------------
-    def _copy_markdown(self, docs_dir: Path) -> None:
-        """Copie FR à la racine, EN/ES avec suffixes."""
+    def _copy_markdown(self, target: Path) -> None:
         for lang in self.languages:
-            lang_dir = self.source_dir / lang
-            if not lang_dir.is_dir():
-                raise BuildSiteError(f"Dossier langue manquant : {lang_dir}")
-            for md_name in self.md_files:
-                src = lang_dir / md_name
+            lang_path = self.source_dir / lang
+            if not lang_path.is_dir():
+                raise BuildSiteError(f"Lang folder missing: {lang_path}")
+            for fname in self.md_files:
+                src = lang_path / fname
                 if not src.is_file():
-                    raise BuildSiteError(f"Fichier manquant : {src}")
-                if lang == "fr":
-                    dst = docs_dir / md_name
-                else:
-                    dst = docs_dir / f"{Path(md_name).stem}.{lang}{Path(md_name).suffix}"
+                    raise BuildSiteError(f"File missing: {src}")
+                dst = target / (fname if lang == "fr" else f"{Path(fname).stem}.{lang}.md")
                 dst.parent.mkdir(parents=True, exist_ok=True)
                 shutil.copy2(src, dst)
 
     # ------------------------------------------------------------------
-    def _write_mkdocs_yml(self, mkcfg: Path, docs_dir: Path) -> None:
+    def _mkdocs_config(self, docs_dir: Path) -> str:
         cfg: Dict[str, Any] = {
             "site_name": self.module.replace("_", " ").title(),
             "docs_dir": str(docs_dir),
             "site_dir": str(self.site_dir),
             "theme": {"name": "material"},
             "plugins": [
-                {
-                    "search": {
-                        "lang": self.languages,
-                        "separator": r"[\s\-]+",
-                        "prebuild_index": True,
-                    }
-                },
+                "search",  # plugin builtin Material (sans opt avancées)
                 {
                     "i18n": {
                         "default_language": "fr",
-                        "languages": [
-                            {
-                                "locale": code,
-                                "name": code.upper(),
-                                "build": True,
-                                "default": code == "fr",
-                            }
+                        "languages": {
+                            code: {"name": code.upper(), "build": True}
                             for code in self.languages
-                        ],
+                        },
                     }
                 },
             ],
@@ -147,13 +120,17 @@ class BuildSite:
                 },
             ],
         }
-        mkcfg.write_text(yaml.dump(cfg, allow_unicode=True, sort_keys=False), encoding="utf-8")
+        return yaml.dump(cfg, sort_keys=False, allow_unicode=True)
 
     # ------------------------------------------------------------------
-    def _mkdocs_build(self, mkcfg: Path) -> None:
+    @staticmethod
+    def _mkdocs_build(mkcfg: Path) -> None:
         try:
-            subprocess.run([
-                "mkdocs", "build", "-f", str(mkcfg), "--strict"
-            ], check=True, capture_output=True, text=True)
+            subprocess.run(
+                ["mkdocs", "build", "-f", str(mkcfg), "--strict"],
+                check=True,
+                capture_output=True,
+                text=True,
+            )
         except subprocess.CalledProcessError as exc:
             raise BuildSiteError(exc.stderr) from exc
