@@ -93,8 +93,6 @@ class CheckCommits:
                     module_name=module,
                     source_dir=self.repo_root / "docs/modules" / module,
                     output_root=self.output_root,
-                    languages=self.languages,
-                    md_files=self.md_files,
                 )
                 builder.run()
             except BuildSiteError as exc:
@@ -121,14 +119,7 @@ class CheckCommits:
         return subprocess.check_output(["git", *args], cwd=self.repo_root, text=True)
     
     def _changed_modules(self, prev_sha: str, head_sha: str) -> set[str]:
-        diff_range = f"{prev_sha}..{head_sha}" if prev_sha else head_sha
-
-        # --- DEBUG ----------------------------------------------------------
-        print(f"🔎 Diff range = {diff_range}")
         raw = self._git("diff", "--name-only", f"{prev_sha}..{head_sha}", "--", "docs/modules")
-        print("🔎 git diff output:")
-        print(raw or "   (vide)")
-        # -------------------------------------------------------------------
 
         modules = set()
         for path in raw.splitlines():
