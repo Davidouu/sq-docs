@@ -90,21 +90,17 @@ class BuildSite:
             "theme": {"name": "material"},
             "plugins": [
                 {
-                    'search': {
-                        'lang': ['fr', 'en', 'es'],
-                        'separator': r'[\s\-]+',
-                        'prebuild_index': True,
-                        'include_html': True
+                    "search": {
+                        "lang": self.languages,          # pas separator / include_html
                     }
                 },
                 {
                     "i18n": {
-                        "default_language": "fr",
-                        "languages": [
+                        "languages": [                  # liste, pas mapping
                             {'locale': 'fr', 'name': 'Français', 'default': True, 'build': True},
                             {'locale': 'en', 'name': 'English', 'build': True},
                             {'locale': 'es', 'name': 'Español', 'build': True}
-                        ]
+                        ],
                     }
                 },
             ],
