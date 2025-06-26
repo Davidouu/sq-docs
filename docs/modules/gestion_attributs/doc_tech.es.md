@@ -1,178 +1,179 @@
 ---
-title: "Technical Documentation"
+---
+title: "Documentación técnica"
 ---
 
-# Technical Documentation
+# Documentación técnica
 
-## Business Glossary
-This glossary describes the Product Attribute Management module of Solusquare Commerce Cloud, essential for managing and utilizing product attributes within the system.
+## Glosario empresarial
+Este glosario describe el módulo de Gestión de atributos de producto de Solusquare Commerce Cloud, esencial para la gestión y explotación de los atributos de productos en el sistema.
 
-### Module Description
-The Attribute Management module allows the creation of product attribute typologies and their association with product types. It facilitates multilingual management of attribute labels and their organization by sort order.
+### Descripción del módulo
+El módulo de Gestión de atributos permite crear tipologías de atributos de productos y asociarlos a los tipos de productos. Facilita la gestión multilingüe de las etiquetas de atributos y su organización por orden de clasificación.
 
-It also provides the ability to assign these attributes to different product types, enabling consistent use on product sheets. The module also manages attribute options, including specifics such as colors and filters.
+También ofrece la posibilidad de asignar estos atributos a diferentes tipos de productos, permitiendo así su explotación coherente en las fichas de productos. El módulo también gestiona las opciones de atributos, incluyendo especificidades como colores y filtros.
 
-### Key Concepts
-- *Attribute*: Descriptive characteristic of a product.
-- *Attribute Typology*: Category or group of attributes.
-- *Product Type*: Classification of a product based on its characteristics.
-- *Multilingual Label*: Name of an attribute translated into multiple languages.
-- *Attribute Option*: Possible value of an attribute.
-- *Filter*: Criterion used to refine product search.
-- *Color*: Specific attribute with color code management.
-- *Sort*: Display order of attributes.
-- *Color Group*: Grouping of attributes related to colors.
+### Conceptos clave
+- *Atributo*: Característica descriptiva de un producto.
+- *Tipología de atributo*: Categoría o grupo de atributos.
+- *Tipo de producto*: Clasificación de un producto según sus características.
+- *Etiqueta multilingüe*: Nombre de un atributo traducido en varios idiomas.
+- *Opción de atributo*: Valor posible de un atributo.
+- *Filtro*: Criterio utilizado para afinar la búsqueda de productos.
+- *Color*: Atributo específico con gestión de código de color.
+- *Clasificación*: Orden de visualización de los atributos.
+- *Grupo de color*: Agrupación de atributos relacionados con los colores.
 
-### Entities
+### Entidades
 
 #### bo_attribut
-**Definition**: Represents a product attribute with its multilingual properties and specific options.  
-**Type**: table  
-**Fields**:  
-- `attribut_id` : numeric • Unique identifier of the attribute  
-- `pays_id` : varchar • Country of application of the attribute  
-- `libelle` : nvarchar • Label of the attribute  
-- `date_creation` : datetime • Creation date  
-- `langue_id` : varchar • Language of the label  
-- `code_ext` : varchar • External code of the attribute  
-- `filtre` : int • Indicates if the attribute is a filter (1 = yes)  
-- `est_une_couleur` : tinyint • Indicates if the attribute represents a color (1 = yes)  
+**Definición**: Representa un atributo de producto con sus propiedades multilingües y sus opciones específicas.  
+**Tipo**: tabla  
+**Campos**:  
+- `attribut_id`: numérico • Identificador único del atributo  
+- `pays_id`: varchar • País de aplicación del atributo  
+- `libelle`: nvarchar • Etiqueta del atributo  
+- `date_creation`: datetime • Fecha de creación  
+- `langue_id`: varchar • Idioma de la etiqueta  
+- `code_ext`: varchar • Código externo del atributo  
+- `filtre`: int • Indica si el atributo es un filtro (1 = sí)  
+- `est_une_couleur`: tinyint • Indica si el atributo representa un color (1 = sí)  
 
 #### bo_attribut_type_produit
-**Definition**: Association between an attribute and a product type with a sort order and status.  
-**Type**: table  
-**Fields**:  
-- `attribut_id` : numeric • Attribute identifier  
-- `type_produit_id` : numeric • Product type identifier  
-- `tri` : numeric • Display order  
-- `statut_attribut` : numeric • Status of the association  
+**Definición**: Asociación entre un atributo y un tipo de producto con un orden de clasificación y estado.  
+**Tipo**: tabla  
+**Campos**:  
+- `attribut_id`: numérico • Identificador del atributo  
+- `type_produit_id`: numérico • Identificador del tipo de producto  
+- `tri`: numérico • Orden de visualización  
+- `statut_attribut`: numérico • Estado de la asociación  
 
 #### bo_attribut_detail
-**Definition**: Detail of an attribute option, with multilingual label and specific properties.  
-**Type**: table  
-**Fields**:  
-- `attribut_detail_id` : int • Unique identifier of the option  
-- `libelle` : nvarchar • Label of the option  
-- `pays_id` : varchar • Country of application  
-- `langue_id` : varchar • Language of the label  
-- `code` : nvarchar • Option code  
-- `ordre` : int • Display order  
-- `attribut_group_id` : int • Associated color group  
-- `code_group` : nvarchar • Group code  
-- `libelle_group` : nvarchar • Group label  
-- `code_enseigne` : varchar • Brand code  
-- `attribut_id` : int • Parent attribute identifier  
-- `code_couleur` : varchar • Hexadecimal color code  
+**Definición**: Detalle de una opción de atributo, con etiqueta multilingüe y propiedades específicas.  
+**Tipo**: tabla  
+**Campos**:  
+- `attribut_detail_id`: int • Identificador único de la opción  
+- `libelle`: nvarchar • Etiqueta de la opción  
+- `pays_id`: varchar • País de aplicación  
+- `langue_id`: varchar • Idioma de la etiqueta  
+- `code`: nvarchar • Código de opción  
+- `ordre`: int • Orden de visualización  
+- `attribut_group_id`: int • Grupo de color asociado  
+- `code_group`: nvarchar • Código del grupo  
+- `libelle_group`: nvarchar • Etiqueta del grupo  
+- `code_enseigne`: varchar • Código enseña  
+- `attribut_id`: int • Identificador del atributo padre  
+- `code_couleur`: varchar • Código de color hexadecimal  
 
 #### bo_attribut_detail_cat_group
-**Definition**: Color group for attribute options, with codes and order.  
-**Type**: table  
-**Fields**:  
-- `attribut_group_id` : int • Group identifier  
-- `couleur` : nvarchar • Associated color  
-- `ordre` : int • Display order  
-- `langue_id` : nvarchar • Language of the label  
-- `code_ext` : nvarchar • External code  
-- `code_couleur` : nvarchar • Hexadecimal color code  
+**Definición**: Grupo de color para las opciones de atributos, con códigos y orden.  
+**Tipo**: tabla  
+**Campos**:  
+- `attribut_group_id`: int • Identificador del grupo  
+- `couleur`: nvarchar • Color asociado  
+- `ordre`: int • Orden de visualización  
+- `langue_id`: nvarchar • Idioma de la etiqueta  
+- `code_ext`: nvarchar • Código externo  
+- `code_couleur`: nvarchar • Código de color hexadecimal  
 
 #### bo_attribut_detail_option
-**Definition**: Association between an attribute option and a product option.  
-**Type**: table  
-**Fields**:  
-- `attribut_option_id` : numeric • Association identifier  
-- `option_id` : numeric • Product option identifier  
-- `attribut_id` : numeric • Attribute identifier  
-- `attribut_detail_id` : numeric • Attribute option identifier  
+**Definición**: Asociación entre una opción de atributo y una opción de producto.  
+**Tipo**: tabla  
+**Campos**:  
+- `attribut_option_id`: numérico • Identificador de la asociación  
+- `option_id`: numérico • Identificador de la opción de producto  
+- `attribut_id`: numérico • Identificador del atributo  
+- `attribut_detail_id`: numérico • Identificador de la opción de atributo  
 
 ---
 
-This module is central to the fine management of product characteristics, their multilingual display, and their association with product types in Solusquare Commerce Cloud.
+Este módulo es central para la gestión precisa de las características de los productos, su visualización multilingüe y su asociación a los tipos de productos en Solusquare Commerce Cloud.
 
-## Functions
-This section describes the functions of the Product Attribute Management module, used to manipulate and validate attributes in Solusquare Commerce Cloud.
+## Funciones
+Esta sección describe las funciones del módulo de Gestión de atributos de producto, utilizadas para manipular y validar los atributos en Solusquare Commerce Cloud.
 
-### Function : change_color_input
-*Parameters:*  
-- `element` : object • DOM input element for color
+### Función: change_color_input
+*Parámetros:*
+- `element`: objeto • elemento DOM input de color
 
-*Return:*  
-- `void` • no return
+*Retorno:*
+- `void` • sin retorno
 
-*Internal Dependencies:*  
-- `jQuery` : DOM manipulation and input value management
+*Dependencias internas:*
+- `jQuery`: manipulación DOM y gestión de valores de input
 
-*Purpose:* Validate and correct the input of a hexadecimal color
+*Objetivo:* Validar y corregir la entrada de un color hexadecimal
 
-*Description:*  
-This JavaScript function validates the input of a color in an input field. It checks that the entered value matches the hexadecimal format with a double hash (`##`) followed by 6 hexadecimal characters (example: `##A1B2C3`). If the value is valid, it removes any error border and updates an adjacent input field with the same value. If the value is invalid, it clears the field and resets the adjacent field to the default black color (`##000000`). This validation ensures that only valid colors are saved in attribute options.
+*Descripción:*  
+Esta función JavaScript valida la entrada de un color en un campo input. Verifica que el valor ingresado corresponda al formato hexadecimal con un doble signo de número (`##`) seguido de 6 caracteres hexadecimales (ejemplo: `##A1B2C3`). Si el valor es válido, elimina cualquier borde de error y actualiza un campo input adyacente con el mismo valor. Si el valor es inválido, vacía el campo y restablece el campo adyacente al color negro por defecto (`##000000`). Esta validación asegura que solo se registren colores válidos en las opciones de atributos.
 
-*Improvements & optimizations:*  
-- Add clear visual feedback on error (red border, message)  
-- Allow input with a single hash (`#`) for better usability  
-- Externalize the regex for easier maintenance  
-- Add unit tests for validation
+*Mejoras y optimizaciones:*  
+- Agregar un retorno visual claro en caso de error (borde rojo, mensaje)  
+- Permitir la entrada con un solo signo de número (`#`) para mayor ergonomía  
+- Externalizar la regex para facilitar el mantenimiento  
+- Agregar pruebas unitarias para la validación
 
-*Function code:*
+*Código de la función:*
 
 ```javascript
 /**
- * Validates the input of a hexadecimal color in an input field.
- * If the value is valid (format ##XXXXXX), updates the adjacent field.
- * Otherwise, resets the value to ##000000.
+ * Valida la entrada de un color hexadecimal en un campo input.
+ * Si el valor es válido (formato ##XXXXXX), actualiza el campo adyacente.
+ * De lo contrario, restablece el valor a ##000000.
  *
- * @param {HTMLElement} element - The color input element to validate.
+ * @param {HTMLElement} element - El elemento input de color a validar.
  */
 function change_color_input(element) {
-    // Regular expression to validate a hexadecimal color with double hash
+    // Expresión regular para validar un color hexadecimal con doble signo de número
     const regex_color = new RegExp('^##([a-fA-F0-9]{6})$');
 
-    // Get the input value
+    // Recupera el valor ingresado en el input
     const value = jQuery(element).val();
 
     if (regex_color.test(value)) {
-        // Valid value: remove any error border
+        // Valor válido: elimina el borde de error eventual
         jQuery(element).css('border', '');
-        // Update the next input field with the same value
+        // Actualiza el campo input siguiente con el mismo valor
         jQuery(element).next('input').val(value);
     } else {
-        // Invalid value: clear the input field
+        // Valor inválido: vacía el campo input
         jQuery(element).val('');
-        // Reset the next input field to default black color
+        // Restablece el campo input siguiente al color negro por defecto
         jQuery(element).next('input').val('##000000');
-        // Optional: show red border to indicate error
+        // Opcional: mostrar un borde rojo para indicar el error
         // jQuery(element).css('border', '1px solid red');
     }
 }
 ```
 
-## Queries
-This section describes the main SQL queries used in the Product Attribute Management module of Solusquare Commerce Cloud, enabling creation, assignment, update, and deletion of attributes and their linkage to product types.
+## Consultas
+Esta sección describe las principales consultas SQL utilizadas en el módulo de Gestión de atributos de producto de Solusquare Commerce Cloud, permitiendo la creación, asignación, actualización y eliminación de atributos y su vinculación a los tipos de productos.
 
 ---
 
-### Query : insert_att
-*Parameters:*  
-- `pays_id` : varchar • Country identifier  
-- `libelle` : nvarchar • Attribute label  
-- `date_creation` : datetime • Creation date  
-- `langue_id` : varchar • Language identifier  
-- `code_ext` : varchar • External attribute code  
-- `filtre` : int • Indicates if the attribute is a filter  
-- `est_une_couleur` : tinyint • Indicates if the attribute is a color
+### Consulta: insert_att
+*Parámetros:*
+- `pays_id`: varchar • Identificador del país
+- `libelle`: nvarchar • Etiqueta del atributo
+- `date_creation`: datetime • Fecha de creación
+- `langue_id`: varchar • Identificador del idioma
+- `code_ext`: varchar • Código externo del atributo
+- `filtre`: int • Indica si el atributo es un filtro
+- `est_une_couleur`: tinyint • Indica si el atributo es un color
 
-*Purpose:* Insert a new attribute into the `bo_attribut` table.
+*Objetivo:* Insertar un nuevo atributo en la tabla `bo_attribut`.
 
-*Improvements & optimizations:*  
-- Use stored procedures to centralize business logic.  
-- Add uniqueness constraints on `code_ext` to avoid duplicates.
+*Mejoras y optimizaciones:*
+- Utilizar procedimientos almacenados para centralizar la lógica empresarial.
+- Agregar restricciones de unicidad sobre `code_ext` para evitar duplicados.
 
-*SQL & Security Risks:*  
-- SQL injection if parameters are not properly escaped.  
-- Validate data before insertion.
+*Riesgos SQL y Seguridad:*
+- Inyección SQL si los parámetros no están correctamente escapados.
+- Verificar la validez de los datos antes de la inserción.
 
-*Query code:*
+*Código de la consulta:*
 ```coldfusion
-<!--- Insert a new attribute --->
+<!--- Inserción de un nuevo atributo --->
 <cfquery name="insert_att" datasource="#request.datasource#">
     INSERT INTO bo_attribut (
         pays_id,
@@ -196,26 +197,26 @@ This section describes the main SQL queries used in the Product Attribute Manage
 
 ---
 
-### Query : insert_att_type_prod
-*Parameters:*  
-- `attribut_id` : numeric • Attribute identifier  
-- `type_produit_id` : numeric • Product type identifier  
-- `tri` : numeric • Display order  
-- `statut_attribut` : numeric • Attribute status (active/inactive)
+### Consulta: insert_att_type_prod
+*Parámetros:*
+- `attribut_id`: numérico • Identificador del atributo
+- `type_produit_id`: numérico • Identificador del tipo de producto
+- `tri`: numérico • Orden de visualización
+- `statut_attribut`: numérico • Estado del atributo (activo/inactivo)
 
-*Purpose:* Associate an attribute with a product type in the `bo_attribut_type_produit` table.
+*Objetivo:* Asociar un atributo a un tipo de producto en la tabla `bo_attribut_type_produit`.
 
-*Improvements & optimizations:*  
-- Check for existing association to avoid duplicates.  
-- Index `attribut_id` and `type_produit_id` columns for search optimization.
+*Mejoras y optimizaciones:*
+- Verificar la existencia previa de la asociación para evitar duplicados.
+- Indexar las columnas `attribut_id` y `type_produit_id` para optimizar las búsquedas.
 
-*SQL & Security Risks:*  
-- SQL injection if parameters are not secured.  
-- Handle errors on duplicate insertion.
+*Riesgos SQL y Seguridad:*
+- Inyección SQL si los parámetros no están asegurados.
+- Gestión de errores en caso de inserción duplicada.
 
-*Query code:*
+*Código de la consulta:*
 ```coldfusion
-<!--- Associate an attribute with a product type --->
+<!--- Asociación de un atributo a un tipo de producto --->
 <cfquery name="insert_att_type_prod" datasource="#request.datasource#">
     INSERT INTO bo_attribut_type_produit (
         attribut_id,
@@ -233,23 +234,23 @@ This section describes the main SQL queries used in the Product Attribute Manage
 
 ---
 
-### Query : delete_attribut
-*Parameters:*  
-- `attribut_id` : numeric • Identifier of the attribute to delete
+### Consulta: delete_attribut
+*Parámetros:*
+- `attribut_id`: numérico • Identificador del atributo a eliminar
 
-*Purpose:* Delete an attribute from the `bo_attribut` table.
+*Objetivo:* Eliminar un atributo de la tabla `bo_attribut`.
 
-*Improvements & optimizations:*  
-- Add cascade deletion or check dependencies before deletion.  
-- Use transactions to ensure data integrity.
+*Mejoras y optimizaciones:*
+- Agregar una eliminación en cascada o verificar las dependencias antes de la eliminación.
+- Utilizar una transacción para garantizar la integridad de los datos.
 
-*SQL & Security Risks:*  
-- Accidental deletion if the identifier is incorrect.  
-- Risk of inconsistency if references exist in other tables.
+*Riesgos SQL y Seguridad:*
+- Eliminación accidental si el identificador es incorrecto.
+- Riesgo de incoherencia si existen referencias en otras tablas.
 
-*Query code:*
+*Código de la consulta:*
 ```coldfusion
-<!--- Delete an attribute --->
+<!--- Eliminación de un atributo --->
 <cfquery name="delete_attribut" datasource="#request.datasource#">
     DELETE FROM bo_attribut
     WHERE attribut_id = <cfqueryparam value="#attribut_id#" cfsqltype="cf_sql_numeric">
@@ -258,24 +259,24 @@ This section describes the main SQL queries used in the Product Attribute Manage
 
 ---
 
-### Query : delete_attribut_prod
-*Parameters:*  
-- `attribut_id` : numeric • Attribute identifier  
-- `type_produit_id` : numeric • Product type identifier
+### Consulta: delete_attribut_prod
+*Parámetros:*
+- `attribut_id`: numérico • Identificador del atributo
+- `type_produit_id`: numérico • Identificador del tipo de producto
 
-*Purpose:* Delete the association between an attribute and a product type.
+*Objetivo:* Eliminar la asociación entre un atributo y un tipo de producto.
 
-*Improvements & optimizations:*  
-- Check existence of the association before deletion.  
-- Use transactions if multiple deletions are needed.
+*Mejoras y optimizaciones:*
+- Verificar la existencia de la asociación antes de la eliminación.
+- Utilizar transacciones si se necesitan múltiples eliminaciones.
 
-*SQL & Security Risks:*  
-- Unintended deletion if parameters are incorrect.  
-- Impact on product sheet display.
+*Riesgos SQL y Seguridad:*
+- Eliminación no deseada si los parámetros se proporcionan incorrectamente.
+- Impacto en la visualización de las fichas de productos.
 
-*Query code:*
+*Código de la consulta:*
 ```coldfusion
-<!--- Delete attribute - product type association --->
+<!--- Eliminación de la asociación atributo - tipo de producto --->
 <cfquery name="delete_attribut_prod" datasource="#request.datasource#">
     DELETE FROM bo_attribut_type_produit
     WHERE attribut_id = <cfqueryparam value="#attribut_id#" cfsqltype="cf_sql_numeric">
@@ -285,26 +286,26 @@ This section describes the main SQL queries used in the Product Attribute Manage
 
 ---
 
-### Query : update_att
-*Parameters:*  
-- `libelle` : nvarchar • New attribute label  
-- `filtre` : int • New filter status  
-- `est_une_couleur` : tinyint • New color status  
-- `attribut_id` : numeric • Identifier of the attribute to update
+### Consulta: update_att
+*Parámetros:*
+- `libelle`: nvarchar • Nueva etiqueta del atributo
+- `filtre`: int • Nuevo estado del filtro
+- `est_une_couleur`: tinyint • Nuevo estado del color
+- `attribut_id`: numérico • Identificador del atributo a actualizar
 
-*Purpose:* Update information of an existing attribute.
+*Objetivo:* Actualizar la información de un atributo existente.
 
-*Improvements & optimizations:*  
-- Validate data before update.  
-- Use stored procedures to centralize logic.
+*Mejoras y optimizaciones:*
+- Validar los datos antes de la actualización.
+- Utilizar un procedimiento almacenado para centralizar la lógica.
 
-*SQL & Security Risks:*  
-- SQL injection if parameters are not secured.  
-- Partial updates may cause inconsistencies.
+*Riesgos SQL y Seguridad:*
+- Inyección SQL si los parámetros no están asegurados.
+- Actualización parcial que puede llevar a incoherencias.
 
-*Query code:*
+*Código de la consulta:*
 ```coldfusion
-<!--- Update an attribute --->
+<!--- Actualización de un atributo --->
 <cfquery name="update_att" datasource="#request.datasource#">
     UPDATE bo_attribut
     SET libelle = <cfqueryparam value="#libelle#" cfsqltype="cf_sql_nvarchar">,
@@ -316,21 +317,21 @@ This section describes the main SQL queries used in the Product Attribute Manage
 
 ---
 
-### Query : getpays
-*Parameters:* None
+### Consulta: getpays
+*Parámetros:* Ninguno
 
-*Purpose:* Retrieve the list of available countries for attribute assignment.
+*Objetivo:* Recuperar la lista de países disponibles para la asignación de atributos.
 
-*Improvements & optimizations:*  
-- Cache results to reduce database access.  
-- Add activation filter if necessary.
+*Mejoras y optimizaciones:*
+- Almacenar en caché los resultados para reducir los accesos a la base de datos.
+- Agregar un filtro de activación si es necesario.
 
-*SQL & Security Risks:*  
-- No major risk, read-only query.
+*Riesgos SQL y Seguridad:*
+- Ningún riesgo mayor, consulta de solo lectura.
 
-*Query code:*
+*Código de la consulta:*
 ```coldfusion
-<!--- Retrieve list of countries --->
+<!--- Recuperación de la lista de países --->
 <cfquery name="getpays" datasource="#request.datasource#">
     SELECT pays_id, nom
     FROM ud_pays
@@ -341,22 +342,22 @@ This section describes the main SQL queries used in the Product Attribute Manage
 
 ---
 
-### Query : get_attribut_langue
-*Parameters:*  
-- `attribut_id` : numeric • Attribute identifier
+### Consulta: get_attribut_langue
+*Parámetros:*
+- `attribut_id`: numérico • Identificador del atributo
 
-*Purpose:* Retrieve labels of an attribute in all languages.
+*Objetivo:* Recuperar las etiquetas de un atributo en todos los idiomas.
 
-*Improvements & optimizations:*  
-- Index `attribut_id` column to speed up search.  
-- Use a view if the join is complex.
+*Mejoras y optimizaciones:*
+- Indexar la columna `attribut_id` para acelerar la búsqueda.
+- Utilizar una vista si la unión es compleja.
 
-*SQL & Security Risks:*  
-- SQL injection if `attribut_id` is not secured.
+*Riesgos SQL y Seguridad:*
+- Inyección SQL si `attribut_id` no está asegurado.
 
-*Query code:*
+*Código de la consulta:*
 ```coldfusion
-<!--- Retrieve attribute labels by language --->
+<!--- Recuperación de las etiquetas de un atributo por idioma --->
 <cfquery name="get_attribut_langue" datasource="#request.datasource#">
     SELECT langue_id, libelle
     FROM bo_attribut
@@ -366,22 +367,22 @@ This section describes the main SQL queries used in the Product Attribute Manage
 
 ---
 
-### Query : getColorAttribute
-*Parameters:*  
-- `pays_id` : varchar • Country identifier
+### Consulta: getColorAttribute
+*Parámetros:*
+- `pays_id`: varchar • Identificador del país
 
-*Purpose:* Retrieve color-type attributes for a given country.
+*Objetivo:* Recuperar los atributos de tipo color para un país dado.
 
-*Improvements & optimizations:*  
-- Add index on `pays_id` and `est_une_couleur`.  
-- Limit results to active attributes.
+*Mejoras y optimizaciones:*
+- Agregar un índice sobre `pays_id` y `est_une_couleur`.
+- Limitar los resultados a los atributos activos.
 
-*SQL & Security Risks:*  
-- SQL injection if `pays_id` is not secured.
+*Riesgos SQL y Seguridad:*
+- Inyección SQL si `pays_id` no está asegurado.
 
-*Query code:*
+*Código de la consulta:*
 ```coldfusion
-<!--- Retrieve color attributes for a country --->
+<!--- Recuperación de los atributos color para un país --->
 <cfquery name="getColorAttribute" datasource="#request.datasource#">
     SELECT attribut_id, libelle
     FROM bo_attribut
@@ -393,17 +394,17 @@ This section describes the main SQL queries used in the Product Attribute Manage
 
 ---
 
-These queries form the functional foundation for managing product attributes in Solusquare Commerce Cloud, enabling creation, association, update, and deletion of attributes, as well as retrieving necessary information for display and selection in the back-office interface.
+Estas consultas constituyen la base funcional para la gestión de atributos de productos en Solusquare Commerce Cloud, permitiendo la creación, asociación, actualización y eliminación de atributos, así como la recuperación de la información necesaria para la visualización y selección en la interfaz de back-office.
 
-## Dependencies
-This section lists the ColdFusion files included in the Product Attribute Management module, specifying their type, role, and inclusion method.
+## Dependencias
+Esta sección lista los archivos ColdFusion incluidos en el módulo de Gestión de atributos de producto, especificando su tipo, función y modo de inclusión.
 
-### Dependency : `act_attribut.cfm`
-*File:* `act_attribut.cfm`  
-*Type:* ColdFusion action module  
-*Purpose:* Manage CRUD operations (insert, update, delete) on product attributes and their associations with product types.
+### Dependencia: `act_attribut.cfm`
+*Archivo:* `act_attribut.cfm`  
+*Tipo:* Módulo de acción ColdFusion  
+*Objetivo:* Gestionar las operaciones CRUD (insertar, actualizar, eliminar) sobre los atributos de productos y sus asociaciones a los tipos de productos.
 
-*Inclusion code:* 
+*Código de la inclusión:* 
 ```coldfusion
 <!--- Include test allow update --->
 <cfinclude template="#request.libroot#/allow_update.cfm">
@@ -572,7 +573,7 @@ This section lists the ColdFusion files included in the Product Attribute Manage
                     <cfloop index="langue_en_cours" list="#langue#">
                         <cfinclude template="qry_get_attribut_option_detail.cfm">
                         <cfif qry_get_attribut_option_detail.libelle eq "" and evaluate("attributes.attribut_detail_libelle_#attribut_detail_id#_#langue_en_cours#") neq "" and evaluate("attributes.attribut_detail_libelle_#attribut_detail_id#_#langue_en_cours#") neq "Non renseign">
-                            <!--- Creation of attribute detail --->
+                            <!--- Creación del atributo detalle --->
                             <cfset attToIns = evaluate("attributes.attribut_detail_libelle_#attribut_detail_id#_#langue_en_cours#")>
                             <cfquery datasource="#request.datasource#">
                                 INSERT INTO bo_attribut_detail
@@ -595,7 +596,7 @@ This section lists the ColdFusion files included in the Product Attribute Manage
                                     and statut & 1 = 1
                             </cfquery>
                         <cfelseif evaluate("attributes.attribut_detail_libelle_#attribut_detail_id#_#langue_en_cours#") neq "Non renseign">
-                            <!--- Modification of attribute detail --->
+                            <!--- Modificación del atributo detalle --->
                             <cfset attToUpd = evaluate("attributes.attribut_detail_libelle_#attribut_detail_id#_#langue_en_cours#")>
                             <cfset codeattToUpd = evaluate("attributes.code_#attribut_detail_id#")>
                             <cfquery datasource="#request.datasource#">
@@ -647,12 +648,12 @@ This section lists the ColdFusion files included in the Product Attribute Manage
 
 ---
 
-### Dependency : `act_color_group.cfm`
-*File:* `act_color_group.cfm`  
-*Type:* ColdFusion action module  
-*Purpose:* Manage creation, update, and deletion of color groups associated with attributes.
+### Dependencia: `act_color_group.cfm`
+*Archivo:* `act_color_group.cfm`  
+*Tipo:* Módulo de acción ColdFusion  
+*Objetivo:* Gestionar la creación, actualización y eliminación de grupos de colores asociados a los atributos.
 
-*Inclusion code:* 
+*Código de la inclusión:* 
 ```coldfusion
 <cfinclude template="#request.queryroot#/qry_get_all_langue_active.cfm">
 
@@ -706,12 +707,12 @@ This section lists the ColdFusion files included in the Product Attribute Manage
 
 ---
 
-### Dependency : `dsp_attribut_form.cfm`
-*File:* `dsp_attribut_form.cfm`  
-*Type:* ColdFusion display template  
-*Purpose:* Display the attribute addition form with multilingual management and association to product types.
+### Dependencia: `dsp_attribut_form.cfm`
+*Archivo:* `dsp_attribut_form.cfm`  
+*Tipo:* Plantilla de visualización ColdFusion  
+*Objetivo:* Mostrar el formulario de adición de atributos con gestión multilingüe y asociación a los tipos de productos.
 
-*Inclusion code:* 
+*Código de la inclusión:* 
 ```coldfusion
 <cfset FIELDLIST = "type_produit_id">
 <cfset max_attributs = 2>
@@ -836,12 +837,12 @@ This section lists the ColdFusion files included in the Product Attribute Manage
 
 ---
 
-### Dependency : `dsp_attribut_option_edit_form.cfm`
-*File:* `dsp_attribut_option_edit_form.cfm`  
-*Type:* ColdFusion display template  
-*Purpose:* Display and manage the form for editing attribute options, with multilingual and color management.
+### Dependencia: `dsp_attribut_option_edit_form.cfm`
+*Archivo:* `dsp_attribut_option_edit_form.cfm`  
+*Tipo:* Plantilla de visualización ColdFusion  
+*Objetivo:* Mostrar y gestionar el formulario de edición de las opciones de los atributos, con gestión multilingüe y colores.
 
-*Inclusion code:* 
+*Código de la inclusión:* 
 ```coldfusion
 <cfset FIELDLIST = "">
 <cfif isdefined("param_client.groupe_couleur") and param_client.groupe_couleur>
@@ -1125,24 +1126,24 @@ This section lists the ColdFusion files included in the Product Attribute Manage
 
 ---
 
-### Dependency : `index.cfm`
-*File:* `index.cfm`  
-*Type:* Main ColdFusion controller  
-*Purpose:* Entry point of the module, manages routing logic of actions (FuseAction) related to attributes and color groups.
+### Dependencia: `index.cfm`
+*Archivo:* `index.cfm`  
+*Tipo:* Controlador ColdFusion principal  
+*Objetivo:* Punto de entrada del módulo, gestiona la lógica de enrutamiento de las acciones (FuseAction) relacionadas con los atributos y grupos de colores.
 
-*Inclusion code:* 
+*Código de la inclusión:* 
 ```coldfusion
 <cfmodule template="#request.cfroot#/users/app_secure.cfm">
 <cfinclude template="#request.cfroot#/users/app_verif_fuseaction.cfm">
 <cfmodule template="#request.cfroot#/app_lang.cfm" lang="#client.langue_id#" dir="attributs">
 
-<!--- Picto color code of an attribute --->
+<!---Código color del pictograma de un atributo--->
 <cfset codeCouleurPicto = false>
 <cfif SQL_Existe( request.datasource, "bo_attribut_detail" , "code_couleur" )>
     <cfset codeCouleurPicto = true>
 </cfif>
 
-<!--- Add color columns if missing --->
+<!--- Adición de columnas de color si faltan --->
 <cfif not SQL_Existe( request.datasource, "bo_attribut_detail_cat_group" , "code_ext" )>
     <cfquery name="addColorColumns" datasource="#request.datasource#">
         alter table bo_attribut_detail_cat_group
@@ -1166,7 +1167,7 @@ This section lists the ColdFusion files included in the Product Attribute Manage
 <cfparam name="attributes.a_modifier" default="0">
 <cfparam name="attributes.une_option" default="0">
 <cfswitch expression="#attributes.fuseaction#">
-    <!--- FuseActions for attributes --->
+    <!--- FuseActions para atributos --->
     <cfcase value="displayAttribut">
         <cfset attributes.error="">
         <cfinclude template="dsp_attribut_header.cfm">
@@ -1338,12 +1339,12 @@ This section lists the ColdFusion files included in the Product Attribute Manage
 
 ---
 
-### Dependency : `qry_get_attribut_all_langue.cfm`
-*File:* `qry_get_attribut_all_langue.cfm`  
-*Type:* ColdFusion query (SQL)  
-*Purpose:* Retrieve labels of an attribute in all available languages.
+### Dependencia: `qry_get_attribut_all_langue.cfm`
+*Archivo:* `qry_get_attribut_all_langue.cfm`  
+*Tipo:* Consulta ColdFusion (SQL)  
+*Objetivo:* Recuperar las etiquetas de un atributo en todos los idiomas disponibles.
 
-*Inclusion code:* 
+*Código de la inclusión:* 
 ```coldfusion
 <cfquery name="qry_get_attribut_all_langue" datasource="#request.datasource#">
     SELECT
@@ -1362,12 +1363,12 @@ This section lists the ColdFusion files included in the Product Attribute Manage
 
 ---
 
-### Dependency : `qry_get_attribut_option.cfm`
-*File:* `qry_get_attribut_option.cfm`  
-*Type:* ColdFusion query (SQL)  
-*Purpose:* Retrieve options associated with an attribute, with language and filter management.
+### Dependencia: `qry_get_attribut_option.cfm`
+*Archivo:* `qry_get_attribut_option.cfm`  
+*Tipo:* Consulta ColdFusion (SQL)  
+*Objetivo:* Recuperar las opciones asociadas a un atributo, con gestión de idiomas y filtros.
 
-*Inclusion code:* 
+*Código de la inclusión:* 
 ```coldfusion
 <CFQUERY NAME="qry_get_attribut_option" DATASOURCE="#request.datasource#">
     SELECT
@@ -1442,12 +1443,12 @@ This section lists the ColdFusion files included in the Product Attribute Manage
 
 ---
 
-### Dependency : `qry_get_attribut_option_detail.cfm`
-*File:* `qry_get_attribut_option_detail.cfm`  
-*Type:* ColdFusion query (SQL)  
-*Purpose:* Retrieve details of an attribute option for a given language.
+### Dependencia: `qry_get_attribut_option_detail.cfm`
+*Archivo:* `qry_get_attribut_option_detail.cfm`  
+*Tipo:* Consulta ColdFusion (SQL)  
+*Objetivo:* Recuperar los detalles de una opción de atributo para un idioma dado.
 
-*Inclusion code:* 
+*Código de la inclusión:* 
 ```coldfusion
 <CFQUERY NAME="qry_get_attribut_option_detail" DATASOURCE="#request.datasource#">
     SELECT distinct attribut_detail_id,libelle,<cfif isdefined("langue_en_cours")>langue_id<cfelse>pays_id</cfif><cfif isdefined("param_client.groupe_couleur") and param_client.groupe_couleur>,attribut_group_id,code</cfif>
@@ -1463,12 +1464,12 @@ This section lists the ColdFusion files included in the Product Attribute Manage
 
 ---
 
-### Dependency : `qry_get_liste_type_produit.cfm`
-*File:* `qry_get_liste_type_produit.cfm`  
-*Type:* ColdFusion query (SQL)  
-*Purpose:* Retrieve the list of product types associated with an attribute.
+### Dependencia: `qry_get_liste_type_produit.cfm`
+*Archivo:* `qry_get_liste_type_produit.cfm`  
+*Tipo:* Consulta ColdFusion (SQL)  
+*Objetivo:* Recuperar la lista de tipos de productos asociados a un atributo.
 
-*Inclusion code:* 
+*Código de la inclusión:* 
 ```coldfusion
 <CFQUERY NAME="qry_get_liste_type_produit" DATASOURCE="#request.datasource#">
     SELECT distinct tp.type_produit_id,tp.libelle
@@ -1482,677 +1483,11 @@ This section lists the ColdFusion files included in the Product Attribute Manage
 
 ---
 
-### Dependency : `qry_type_produit_sans_attribut.cfm`
-*File:* `qry_type_produit_sans_attribut.cfm`  
-*Type:* ColdFusion query (SQL)  
-*Purpose:* Retrieve product types not yet associated with an attribute.
+### Dependencia: `qry_type_produit_sans_attribut.cfm`
+*Archivo:* `qry_type_produit_sans_attribut.cfm`  
+*Tipo:* Consulta ColdFusion (SQL)  
+*Objetivo:* Recuperar los tipos de productos que aún no están asociados a un atributo.
 
-*Inclusion code:* 
+*Código de la inclusión:* 
 ```coldfusion
-<CFQUERY NAME="qry_type_produit_sans_attribut" DATASOURCE="#request.datasource#">
-    SELECT DISTINCT ud_type_produit.pays_id + ' - ' + isnull(c2.cat_nom, 'NC') + ' / ' + ISNULL(c1.cat_nom, 'NC') + ' / ' +  ud_type_produit.libelle + ' (ID : ' + cast(ud_type_produit.type_produit_id as varchar) + ')' as libelle , 
-            ud_type_produit.type_produit_id
-    FROM ud_type_produit WITH(NOLOCK)
-    LEFT JOIN bo_type_produit_categorie WITH(NOLOCK) ON bo_type_produit_categorie.type_produit_id=ud_type_produit.type_produit_id
-                                                                    AND bo_type_produit_categorie.pays_id=ud_type_produit.pays_id
-    LEFT JOIN ud_categorie c1             WITH(NOLOCK) ON c1.pays_id=ud_type_produit.pays_id
-                                                                    AND c1.cat_id = bo_type_produit_categorie.cat_id
-    LEFT JOIN ud_categorie c2             WITH(NOLOCK) ON c2.cat_id=c1.parent_id
-                                                                      AND c2.pays_id=ud_type_produit.pays_id
-    left join bo_attribut_type_produit atp  with (nolock) on atp.type_produit_id = ud_type_produit.type_produit_id
-    WHERE atp.type_produit_id is null and  ud_type_produit.pays_id = '#request.pays_base#'
-    ORDER BY libelle
-</CFQUERY>
-```
-
----
-
-## Summary
-The Product Attribute Management module mainly relies on ColdFusion files that handle:  
-- CRUD actions on attributes (`act_attribut.cfm`),  
-- Management of color groups linked to attributes (`act_color_group.cfm`),  
-- User interfaces for creation, modification, and search of attributes and options (`dsp_*.cfm`),  
-- ColdFusion SQL queries to retrieve necessary data (`qry_*.cfm`),  
-- The main controller `index.cfm` orchestrating different actions based on the `fuseaction` parameter.
-
-These dependencies are included via `<cfinclude>` or `<cfmodule>` and use the database to store and retrieve multilingual and multi-country information of product attributes.
-
-## Error Handling
-This section describes error handling in the product attribute management module, ensuring robustness during CRUD operations (creation, update, deletion) and consistency of multilingual data.
-
-### Block: Attribute Insertion
-*File:* `act_attribut.cfm` (lines 16-91)  
-*Handled errors:*  
-- Database error during insertion of multilingual attributes and association with product types.  
-*Behavior:*  
-- Catches error via `<cfcatch type="database">`.  
-- Sends alert email to developers with error dump.  
-- Displays debug via included template.  
-*Error propagation:*  
-- Error stored in variable `error` and surfaced in UI.  
-*Improvements & Optimizations:*  
-- Centralize error handling to avoid repetition.  
-- Add persistent logs for audit.  
-- Provide more explicit user messages.  
-
-*Inclusion code:*  
-```coldfusion
-<cftry>
-    <cftransaction>
-        <!--- loop inserting multilingual attributes and product type associations --->
-    </cftransaction>
-    <cfcatch type="database">
-        <cfset error = "#label_err_insert#<br/>">
-        <cfmail type="text" to="dev@solusquare.com" from="dev@solusquare.com" subject="error insert attribut">
-            <cfdump var="#cfcatch#">
-        </cfmail>
-        <cfinclude template="#request.libroot#/debug.cfm">
-    </cfcatch>
-</cftry>
-```
-
-### Block: Attribute Deletion
-*File:* `act_attribut.cfm` (lines 95-110)  
-*Handled errors:*  
-- Database error during deletion of an attribute and its associations.  
-*Behavior:*  
-- Catches error via `<cfcatch type="database">`.  
-- Displays debug via included template.  
-- Error message stored in `error`.  
-*Error propagation:*  
-- Error surfaced in UI via `error` variable.  
-*Improvements & Optimizations:*  
-- Add email notification as for insertion.  
-- Check dependencies before deletion to avoid errors.  
-
-*Inclusion code:*  
-```coldfusion
-<cftry>
-    <cftransaction>
-        <cfquery name="delete_attribut" datasource="#request.datasource#">
-            delete from bo_attribut where attribut_id = #attributes.attribut_id#
-        </cfquery>
-        <cfquery name="delete_attribut_prod" datasource="#request.datasource#">
-            delete from bo_attribut_type_produit where attribut_id = #attributes.attribut_id#
-        </cfquery>
-    </cftransaction>
-    <cfcatch type="database">
-        <cfset error = "#label_err_delete#<br/>">
-        <cfinclude template="#request.libroot#/debug.cfm">
-    </cfcatch>
-</cftry>
-```
-
-### Block: Attribute Update
-*File:* `act_attribut.cfm` (lines 114-166)  
-*Handled errors:*  
-- Database error during update of multilingual attribute labels.  
-*Behavior:*  
-- Catches error via `<cfcatch type="database">`.  
-- Sends alert email to developers with error dump.  
-- Displays debug via included template.  
-- Error message stored in `error`.  
-*Error propagation:*  
-- Error surfaced in UI via `error` variable.  
-*Improvements & Optimizations:*  
-- Validate data before update to avoid SQL errors.  
-- Centralize error handling.  
-
-*Inclusion code:*  
-```coldfusion
-<cftry>
-    <cftransaction>
-        <!--- loop updating multilingual attributes --->
-    </cftransaction>
-    <cfcatch type="database">
-        <cfmail type="text" to="dev@solusquare.com" from="dev@solusquare.com" subject="error update attribut">
-            <cfdump var="#cfcatch#">
-        </cfmail>
-        <cfset error = "#label_err_update#<br/>">
-        <cfinclude template="#request.libroot#/debug.cfm">
-    </cfcatch>
-</cftry>
-```
-
-### Block: Attribute Option Update
-*File:* `act_attribut.cfm` (lines 171-269)  
-*Handled errors:*  
-- Database error during creation or modification of multilingual attribute options.  
-*Behavior:*  
-- Catches error via `<cfcatch type="database">`.  
-- Sends alert email to developers with error dump in HTML.  
-- Displays debug via included template.  
-- Error message stored in `error`.  
-*Error propagation:*  
-- Error surfaced in UI via `error` variable.  
-*Improvements & Optimizations:*  
-- Improve input data validation.  
-- Provide finer rollback in case of partial error.  
-
-*Inclusion code:*  
-```coldfusion
-<cftry>
-    <cftransaction>
-        <!--- loop creating/modifying attribute options --->
-    </cftransaction>
-    <cfcatch type="database">
-        <cfmail type="html" to="dev@solusquare.com" from="dev@solusquare.com" subject="BO - #uCase('#server.sq.machine_prefixe#')# - Error update option attribut">
-            <cfdump var="#cfcatch#">
-        </cfmail>
-        <cfset error = "#label_err_update#<br/>">
-        <cfinclude template="#request.libroot#/debug.cfm">
-    </cfcatch>
-</cftry>
-```
-
----
-
-This error handling ensures module stability in case of database issues, with clear error reporting to technical teams and tracking via automatic emails. A possible improvement would be to standardize error handling and add persistent logs for easier diagnostics.
-
-## Interface
-The Attribute Management module allows creating, modifying, searching, and managing product attributes as well as their options and associated color groups.
-
-### Component: Attribute List
-*File:* `dsp_attribut.cfm`  
-*Purpose:* Display paginated list of attributes with detail, edit, delete, and option management actions.  
-*Fields:*  
-- attribut_id  
-- code_ext  
-- pays_id (displayed by flag)  
-- langue_id (displayed by flag)  
-- libelle  
-- date_creation  
-
-*Events & Actions:*  
-- Attribute detail (link to `detailAttribut`)  
-- Edit attribute (link to `editAttribut`)  
-- Delete attribute (confirmation then deletion)  
-- Edit attribute options (link to `editAttributOption`)  
-
-*Visual dependencies:*  
-- HTML table with pagination and sorting  
-- Action icons (detail, edit, delete, options)  
-- Flags for country and language  
-
-*Improvements & optimizations:*  
-- Add multi-criteria search filter (country, product type, attribute)  
-- Access rights management for deletion  
-
-*Query code:*  
-```coldfusion
-<CFQUERY NAME="qry_attribut_search" DATASOURCE="#request.datasource#">
-  SELECT DISTINCT bo_attribut.*, 
-    CASE WHEN bo_attribut.pays_id = '#request.pays_base#' AND bo_attribut.langue_id = '#request.langue_base#' THEN 1 ELSE 0 END AS ordre_aff_module
-  FROM bo_attribut WITH (NOLOCK)
-  LEFT JOIN bo_attribut_type_produit WITH (NOLOCK) ON bo_attribut_type_produit.attribut_id = bo_attribut.attribut_id
-  WHERE 0=0
-  <CFIF ATTRIBUTES.CRITERIA NEQ "">
-    #PreserveSingleQuotes(attributes.Criteria)#
-  </CFIF>
-  ORDER BY bo_attribut.attribut_id, ordre_aff_module DESC
-</CFQUERY>
-```
-
----
-
-### Component: Attribute Addition Form
-*File:* `dsp_attribut_form.cfm`  
-*Purpose:* Allow creation of new multilingual attributes and their association to product types.  
-*Fields:*  
-- type_produit_id (multi-selection)  
-- attribut_id_1, attribut_id_2 (existing attribute selection)  
-- attribut_{langue_id}_1, attribut_{langue_id}_2 (new attribute labels by language)  
-
-*Events & Actions:*  
-- Form submission to save (`saveAttribut`)  
-- Cancel and return to search  
-
-*Visual dependencies:*  
-- Multilingual table with columns per language (flags)  
-- Multiple selector for product types  
-- Information and error notifications  
-
-*Improvements & optimizations:*  
-- Server-side validation of required fields  
-- Complete multilingual label management  
-
-*Query code:*  
-N/A (form only, insertion handled in `act_attribut.cfm`)
-
----
-
-### Component: Attribute Edit Form
-*File:* `dsp_attribut_edit_form.cfm`  
-*Purpose:* Edit an existing attribute with its multilingual labels and parameters (code, filter, color).  
-*Fields:*  
-- code_ext  
-- filtre (checkbox)  
-- est_une_couleur (checkbox)  
-- attribut_{Index} (label by language)  
-- langue_id_{Index} (language identifier)  
-
-*Events & Actions:*  
-- Form submission for update (`updateAttribut`)  
-- Cancel and return to list  
-
-*Visual dependencies:*  
-- Multilingual text fields with flags  
-- Error and alert notifications  
-- Checkboxes for specific options  
-
-*Improvements & optimizations:*  
-- Conditional field management depending on client (e.g., `param_client.aff_spe_Frago`)  
-- Pre-fill existing data  
-
-*Query code:*  
-N/A (update handled in `act_attribut.cfm`)
-
----
-
-### Component: Attribute Detail
-*File:* `dsp_attribut_detail.cfm`  
-*Purpose:* Display details of an attribute, its labels by country/language, and associated product types.  
-*Fields:*  
-- attribut_id  
-- libelle (by country/language)  
-- date_creation  
-- list of associated product types (type_produit_id, libelle)  
-
-*Events & Actions:*  
-- Back button to list  
-
-*Visual dependencies:*  
-- Clear display of multilingual labels with flags  
-- Simple list of product types  
-
-*Improvements & optimizations:*  
-- Optimized loading via specific queries  
-
-*Query code:*  
-```coldfusion
-<CFQUERY NAME="qry_get_attribut_detail" DATASOURCE="#request.datasource#">
-  SELECT *, ud_pays.nom
-  FROM bo_attribut WITH (NOLOCK)
-  INNER JOIN ud_pays WITH (NOLOCK) ON ud_pays.pays_id = bo_attribut.pays_id
-  WHERE bo_attribut.attribut_id = #attributes.attribut_id#
-</CFQUERY>
-
-<CFQUERY NAME="qry_get_liste_type_produit" DATASOURCE="#request.datasource#">
-  SELECT DISTINCT tp.type_produit_id, tp.libelle
-  FROM ud_type_produit tp WITH (NOLOCK)
-  INNER JOIN bo_attribut_type_produit atp WITH (NOLOCK) ON atp.type_produit_id = tp.type_produit_id
-  WHERE atp.attribut_id = #attributes.attribut_id#
-    AND tp.pays_id = '#request.pays_maitre#'
-  ORDER BY tp.libelle
-</CFQUERY>
-```
-
----
-
-### Component: Attribute Option Edit Form
-*File:* `dsp_attribut_option_edit_form.cfm`  
-*Purpose:* Manage options (possible values) of an attribute with their multilingual labels, codes, colors, and groups.  
-*Fields:*  
-- attribut_detail_id  
-- code (option code)  
-- degrade (bicolor checkbox)  
-- code_couleur_picto (hexadecimal color)  
-- libelle (by language)  
-- attribut_group_id (color group)  
-
-*Events & Actions:*  
-- Search option by label  
-- Update options (`updateAttributOption`)  
-- Cancel  
-
-*Visual dependencies:*  
-- Table with multilingual columns (flags)  
-- Color picker and bicolor management  
-- Color group selector  
-
-*Improvements & optimizations:*  
-- Color code validation  
-- Dynamic interaction for bicolor  
-- Specific client support (`param_client.aff_spe_Frago`)  
-
-*Query code:*  
-```coldfusion
-<CFQUERY NAME="qry_get_attribut_option" DATASOURCE="#request.datasource#">
-  SELECT DISTINCT bo_attribut_detail.attribut_detail_id, bo_attribut_detail.libelle, bo_attribut_detail.langue_id,
-    bo_attribut_detail.code, bo_attribut_detail.ordre, bo_attribut_detail.attribut_group_id,
-    bo_attribut_detail.code_group, bo_attribut_detail.libelle_group
-    <CFIF codeCouleurPicto>, code_couleur</CFIF>
-  FROM bo_attribut_detail WITH (NOLOCK)
-  WHERE (bo_attribut_detail.attribut_id = #attributes.attribut_id#
-    OR bo_attribut_detail.attribut_detail_id IN
-      (SELECT attribut_detail_id FROM bo_attribut_detail_option WITH (NOLOCK) WHERE attribut_id = #attributes.attribut_id#))
-    AND bo_attribut_detail.langue_id = '#request.langue_base#'
-  ORDER BY bo_attribut_detail.attribut_detail_id, bo_attribut_detail.langue_id
-</CFQUERY>
-```
-
----
-
-### Component: Attribute Search
-*File:* `dsp_attribut_search.cfm`  
-*Purpose:* Allow searching attributes by multiple criteria (country, product type, attribute).  
-*Fields:*  
-- Crit1_Value : pays_id  
-- Crit2_Value : type_produit_id  
-- Crit3_Value : attribut_id  
-
-*Events & Actions:*  
-- Form submission to launch search (`searchingAttribut`)  
-
-*Visual dependencies:*  
-- Dropdown selectors with live search  
-- Search button  
-
-*Improvements & optimizations:*  
-- Default value management  
-- Informational messages on success  
-
-*Query code:*  
-N/A (form only, query in `qry_attribut_search.cfm`)
-
----
-
-### Component: Color Group Management
-*Files:* `dsp_color_group.cfm`, `dsp_color_group_add.cfm`, `dsp_color_group_search.cfm`, `dsp_attribut_group_edit_form.cfm`  
-*Purpose:* Create, modify, search, and delete color groups associated with attributes.  
-*Fields:*  
-- attribut_group_id  
-- couleur (label)  
-- ordre (sort)  
-- code_ext  
-- couleur_url  
-- code_couleur  
-- langue_id (multilingual)  
-
-*Events & Actions:*  
-- Add group (`saveColorGroup`)  
-- Modify group (`updateColorGroup`)  
-- Delete group (`deleteColorGroup`)  
-- Search group (`searchingColorGroup`)  
-
-*Visual dependencies:*  
-- Table listing groups with actions (edit, delete)  
-- Multilingual form for color labels  
-- Error and alert notifications  
-
-*Improvements & optimizations:*  
-- Multilingual validation of required fields  
-- Access rights management  
-- Support colors via hex code and URL  
-
-*Query code:*  
-```coldfusion
-<CFQUERY NAME="qry_color_group_search" DATASOURCE="#request.datasource#">
-  SELECT * FROM bo_attribut_detail_cat_group WITH (NOLOCK)
-  WHERE 1=1
-  <CFIF isDefined("ATTRIBUTES.criteria") AND ATTRIBUTES.CRITERIA NEQ "">
-    #PreserveSingleQuotes(attributes.Criteria)#
-  </CFIF>
-  <CFIF isDefined("ATTRIBUTES.attribut_group_id")>
-    AND attribut_group_id = #attributes.attribut_group_id#
-  </CFIF>
-  ORDER BY attribut_group_id, ordre
-</CFQUERY>
-```
-
----
-
-### Component: Attribute Actions
-*File:* `act_attribut.cfm`  
-*Purpose:* Manage CRUD actions on attributes and options (insert, update, delete, updateoption).  
-*Fields:* Dynamic variables depending on action (e.g., attribut_id, libelle, type_produit_id, etc.)  
-
-*Events & Actions:*  
-- insert: create multilingual attributes and associate with product types  
-- update: update labels and parameters  
-- delete: delete attribute and associations  
-- updateoption: update attribute options  
-
-*Visual dependencies:*  
-- Error management with notifications  
-- Email sending on database errors  
-
-*Improvements & optimizations:*  
-- Transactions to ensure consistency  
-- Management of multiple languages and countries  
-- Specific client support (e.g., filter, color)  
-
-*Code excerpt (insert):*  
-```coldfusion
-<cftransaction>
-  <cfset tri=1>
-  <cfinclude template="#request.queryroot#/qry_get_all_pays_langue.cfm">
-  <cfloop index="I" from="1" to="#attributes.max_attributs#">
-    <cfif evaluate("attributes.attribut_id_#I#") eq "">
-      <cfmodule template="#request.libroot#/act_max_id.cfm" datasource="#request.datasource#" tablename="bo_attribut" primarykey="attribut_id">
-      <cfset nb_insert = 0>
-      <cfloop query="qry_get_all_pays_langue">
-        <cfif isdefined("attributes.attribut_#qry_get_all_pays_langue.langue_id#_#I#") and trim(evaluate("attributes.attribut_#qry_get_all_pays_langue.langue_id#_#I#")) neq "">
-          <cfset current_libelle = trim(evaluate("attributes.attribut_#qry_get_all_pays_langue.langue_id#_#I#"))>
-          <cfquery name="insert_att" datasource="#request.datasource#">
-            INSERT INTO bo_attribut (attribut_id, pays_id, langue_id, libelle, date_creation)
-            VALUES (#max_id#, '#qry_get_all_pays_langue.pays_id#', '#qry_get_all_pays_langue.langue_id#', '#current_libelle#', getdate())
-          </cfquery>
-          <cfset nb_insert = nb_insert + 1>
-        </cfif>
-      </cfloop>
-      ...
-    </cfif>
-  </cfloop>
-</cftransaction>
-```
-
----
-
-This documentation summarizes the main interfaces of the Product Attribute Management module of Solusquare Commerce Cloud, with their associated ColdFusion files, fields, actions, visual dependencies, and key query excerpts.
-
-## AJAX Queries
-This section describes AJAX queries used in the Product Attribute Management module, enabling dynamic manipulation of attributes without full page reload.
-
-### Query: Attribute Search
-*Parameters:*  
-- `pays` : string • country code to filter attributes  
-- `typeProduit` : string • product type identifier  
-- `attribut` : string • attribute identifier  
-
-*Purpose:*  
-Retrieve the list of attributes filtered by country, product type, and selected attribute.
-
-*Improvements & optimizations:*  
-- Implement server-side pagination to limit load.  
-- Hide irrelevant attributes according to business context.  
-- Cache frequent results to speed up response.  
-
-*SQL & Security Risks:*  
-- Risk of SQL injection if parameters are not properly escaped.  
-- Verify user access rights before executing query.  
-- Strictly validate and filter inputs server-side.  
-
-*Query code:*  
-```coldfusion
-<cfquery name="qAttributs" datasource="#datasource#">
-    SELECT a.id_attribut, a.nom_attribut
-    FROM attributs a
-    INNER JOIN attributs_types_produits atp ON a.id_attribut = atp.id_attribut
-    WHERE 1=1
-    <cfif structKeyExists(url, "pays") AND len(trim(url.pays))>
-        AND a.pays = <cfqueryparam value="#url.pays#" cfsqltype="cf_sql_varchar">
-    </cfif>
-    <cfif structKeyExists(url, "typeProduit") AND len(trim(url.typeProduit))>
-        AND atp.id_type_produit = <cfqueryparam value="#url.typeProduit#" cfsqltype="cf_sql_integer">
-    </cfif>
-    <cfif structKeyExists(url, "attribut") AND len(trim(url.attribut))>
-        AND a.id_attribut = <cfqueryparam value="#url.attribut#" cfsqltype="cf_sql_integer">
-    </cfif>
-    ORDER BY a.nom_attribut
-</cfquery>
-```
-
-### Query: Attribute Addition
-*Parameters:*  
-- `typesProduits` : array • list of associated product type identifiers  
-- `attributsExistants` : array • existing attribute identifiers to associate  
-- `nouveauxAttributs` : struct • keys = language codes, values = names of new attributes  
-
-*Purpose:*  
-Create new multilingual attributes and associate them with selected product types.
-
-*Improvements & optimizations:*  
-- Validate presence of descriptions in all languages before insertion.  
-- Use transactions to ensure consistency of multiple inserts.  
-- Provide duplicate management to avoid conflicts.  
-
-*SQL & Security Risks:*  
-- Risk of SQL injection if values are not parameterized.  
-- Control user write permissions.  
-- Verify validity of product type identifiers.  
-
-*Query code:*  
-```coldfusion
-<cftransaction>
-    <!--- Insert new multilingual attributes --->
-    <cfloop collection="#nouveauxAttributs#" item="langue">
-        <cfquery datasource="#datasource#">
-            INSERT INTO attributs (nom_attribut, langue)
-            VALUES (<cfqueryparam value="#nouveauxAttributs[langue]#" cfsqltype="cf_sql_varchar">, <cfqueryparam value="#langue#" cfsqltype="cf_sql_varchar">)
-        </cfquery>
-        <cfset newId = cfqueryresult.generatedKey>
-        <!--- Associate with product types --->
-        <cfloop array="#typesProduits#" index="typeProduit">
-            <cfquery datasource="#datasource#">
-                INSERT INTO attributs_types_produits (id_attribut, id_type_produit)
-                VALUES (<cfqueryparam value="#newId#" cfsqltype="cf_sql_integer">, <cfqueryparam value="#typeProduit#" cfsqltype="cf_sql_integer">)
-            </cfquery>
-        </cfloop>
-    </cfloop>
-
-    <!--- Associate existing attributes --->
-    <cfloop array="#attributsExistants#" index="idAttribut">
-        <cfloop array="#typesProduits#" index="typeProduit">
-            <cfquery datasource="#datasource#">
-                INSERT INTO attributs_types_produits (id_attribut, id_type_produit)
-                VALUES (<cfqueryparam value="#idAttribut#" cfsqltype="cf_sql_integer">, <cfqueryparam value="#typeProduit#" cfsqltype="cf_sql_integer">)
-            </cfquery>
-        </cfloop>
-    </cfloop>
-</cftransaction>
-```
-
-## Business Logic
-This module manages creation, editing, deletion, and assignment of product attributes to different product types, with multilingual support and advanced option management, including color attributes.
-
-### Attribute Creation and Update Logic
-*Explanation:*  
-When creating or updating an attribute, the system verifies label input in all active languages, avoids duplicates, and associates the attribute with selected product types. Attributes can be marked as filterable or as representing a color.
-
-Constraints:  
-- Mandatory validation of labels in all languages.  
-- No duplicate attributes for the same master country.  
-- Multiple associations possible with product types.  
-- Management of color attributes with color code and pictogram.
-
-```coldfusion
-{"source": "act_attribut.cfm", "start": 20, "end": 20, "code": "\t\t\t\t<cfloop index=\"I\" from=\"1\" to =\"#attributes.max_attributs#\">\n"}
-{"source": "act_attribut.cfm", "start": 21, "end": 21, "code": "\t\t\t\t\t<cfif evaluate(\"attributes.attribut_id_#I#\") eq \"\">\n"}
-{"source": "act_attribut.cfm", "start": 27, "end": 27, "code": "\t\t\t\t\t\t<cfloop query=\"qry_get_all_pays_langue\">\n"}
-{"source": "act_attribut.cfm", "start": 28, "end": 28, "code": "\t\t\t\t\t\t\t<cfif isdefined(\"attributes.attribut_#qry_get_all_pays_langue.langue_id#_#I#\") and trim(evaluate(\"attributes.attribut_#qry_get_all_pays_langue.langue_id#_#I#\")) neq \"\">\n"}
-{"source": "act_attribut.cfm", "start": 29, "end": 29, "code": "\t\t\t\t\t\t\t\t<cfset current_libelle = trim(evaluate(\"attributes.attribut_#qry_get_all_pays_langue.langue_id#_#I#\"))>\n"}
-{"source": "act_attribut.cfm", "start": 48, "end": 48, "code": "\t\t\t\t\t\t<cfif nb_insert gt 0>\n"}
-{"source": "act_attribut.cfm", "start": 49, "end": 49, "code": "\t\t\t\t\t\t\t<cfloop index=\"Index\" list=\"#attributes.type_produit_id#\">\n"}
-{"source": "act_attribut.cfm", "start": 64, "end": 64, "code": "\t\t\t\t\t\t<cfset tri = tri +1>\n"}
-{"source": "act_attribut.cfm", "start": 65, "end": 65, "code": "\t\t\t\t\t<cfelseif evaluate(\"attributes.attribut_id_#I#\") neq \"\">\n"}
-{"source": "act_attribut.cfm", "start": 66, "end": 66, "code": "\t\t\t\t\t\t<cfloop index=\"Index\" list=\"#attributes.type_produit_id#\">\n"}
-{"source": "act_attribut.cfm", "start": 80, "end": 80, "code": "\t\t\t\t\t\t<cfset tri = tri +1>\n"}
-```
-
-### Attribute Options Management Logic
-*Explanation:*  
-Each attribute can have multiple options, themselves multilingual. The module manages creation, modification, and deletion of options, with specific support for color options, including gradient and multiple color code management.
-
-Constraints:  
-- Options must have a label in each active language.  
-- Specific management of color options with hexadecimal codes.  
-- Validation of bicolor and gradient options.  
-- Possible association to color groups.
-
-```coldfusion
-{"source": "act_attribut_option_edit_form.cfm", "start": 7, "end": 7, "code": "\t<cfset pays = \"\">\n"}
-{"source": "act_attribut_option_edit_form.cfm", "start": 21, "end": 21, "code": "\t<cfif codeCouleurPicto AND isdefined(\"qry_get_attribut_all_langue.est_une_couleur\") AND val(qry_get_attribut_all_langue.est_une_couleur) eq 1>\n"}
-{"source": "act_attribut_option_edit_form.cfm", "start": 219, "end": 219, "code": "\t\t\t\t\t\t\t\t\t<cfif \t\tisdefined(\"attributes.degrade_#attribut_detail_id#\") \n"}
-{"source": "act_attribut_option_edit_form.cfm", "start": 222, "end": 222, "code": "\t\t\t\t\t\t\t\t\t\t\t<cfset liste_couleur = evaluate(\"attributes.liste_code_couleur_picto_#attribut_detail_id#\")>\n"}
-{"source": "act_attribut_option_edit_form.cfm", "start": 223, "end": 223, "code": "\t\t\t\t\t\t\t\t\t\t\t<cfif Len(liste_couleur) eq 0 OR liste_couleur eq \"##\"><cfset liste_couleur = \"##000000\"></cfif>\n"}
-{"source": "act_attribut_option_edit_form.cfm", "start": 224, "end": 224, "code": "\t\t\t\t\t\t\t\t\t\t\t<cfif Listlen(liste_couleur,';') gte 2>\n"}
-{"source": "act_attribut_option_edit_form.cfm", "start": 225, "end": 225, "code": "\t\t\t\t\t\t\t\t\t\t\t\t<cfif Len(trim(ListGetAt(liste_couleur,2,';'))) eq 0>\n"}
-{"source": "act_attribut_option_edit_form.cfm", "start": 226, "end": 226, "code": "\t\t\t\t\t\t\t\t\t\t\t\t\t<cfset liste_couleur = ListGetAt(liste_couleur,1,';')>\n"}
-{"source": "act_attribut_option_edit_form.cfm", "start": 227, "end": 227, "code": "\t\t\t\t\t\t\t\t\t\t\t\t<cfelse>\n"}
-{"source": "act_attribut_option_edit_form.cfm", "start": 228, "end": 228, "code": "\t\t\t\t\t\t\t\t\t\t\t\t\t<cfset liste_couleur = ListGetAt(liste_couleur,1,';') & \";\" & ListGetAt(liste_couleur,2,';')>\n"}
-```
-
-### Data Validation Logic
-*Explanation:*  
-Before any insertion or update, the module validates data completeness, notably the presence of labels in all languages, selection of product types, and absence of duplicates. Errors are surfaced for correction.
-
-Constraints:  
-- All required fields must be filled.  
-- Mandatory multilingual labels.  
-- Duplicate attribute check.  
-- Contextualized error messages.
-
-```coldfusion
-{"source": "err_attribut_entry.cfm", "start": 4, "end": 4, "code": "<cfset attribut = \"False\">\n"}
-{"source": "err_attribut_entry.cfm", "start": 5, "end": 5, "code": "<cfloop index=\"I\" from=\"1\" to=\"1\">\n"}
-{"source": "err_attribut_entry.cfm", "start": 6, "end": 6, "code": "\t<cfif evaluate(\"attributes.attribut_id_#I#\") neq \"\">\n"}
-{"source": "err_attribut_entry.cfm", "start": 11, "end": 11, "code": "\t\t\t<cfset ERROR = ERROR & \"#label_err_doublon_creation_1# #I#, #label_err_doublon_creation_2#<br/>\">\n"}
-{"source": "err_attribut_entry.cfm", "start": 16, "end": 16, "code": "\t\t\t<cfif evaluate(\"attributes.attribut_#langue_id#_#I#\") eq \"\">\n"}
-{"source": "err_attribut_entry.cfm", "start": 17, "end": 17, "code": "\t\t\t\t<cfset ERROR = ERROR & \"#label_err_libelle_attribut_langue#<br/>\">\n"}
-{"source": "err_attribut_entry.cfm", "start": 27, "end": 27, "code": "<cfloop list=\"#attributes.requiredfields#\" index=\"counter\">\n"}
-{"source": "err_attribut_entry.cfm", "start": 28, "end": 28, "code": "\t<cfif not isdefined(\"attributes.#counter#\") or Trim(Evaluate(\"attributes.\" & \"#counter#\")) IS \"\">\n"}
-{"source": "err_attribut_entry.cfm", "start": 29, "end": 29, "code": "\t\t<cfif counter eq \"type_produit_id\">\n"}
-{"source": "err_attribut_entry.cfm", "start": 30, "end": 30, "code": "\t\t\t<cfset ERROR = ERROR & \"#label_err_selection_type_produit#<br/>\">\n"}
-```
-
-### Attribute Display and Search Logic
-*Explanation:*  
-The module offers a filtered search interface by country, product type, and attribute, as well as a paginated list of existing attributes. Results are displayed with their multilingual labels and associated options.
-
-Constraints:  
-- Multi-criteria search with empty criteria management.  
-- Grouped display by attribute and language.  
-- Pagination and access rights management.  
-- Display of color and filter options.
-
-```coldfusion
-{"source": "dsp_attribut_search.cfm", "start": 3, "end": 3, "code": "<cfset FIELDLIST = \"Crit1_Value,Crit2_Value,Crit3_Value\">\n"}
-{"source": "dsp_attribut_search.cfm", "start": 17, "end": 17, "code": "<cfoutput>\n"}
-{"source": "dsp_attribut_search.cfm", "start": 19, "end": 19, "code": "\t<div class=\"contenttitle\">\n"}
-{"source": "dsp_attribut.cfm", "start": 34, "end": 34, "code": "\t<cfoutput query=\"#qry_name#\" group=\"attribut_id\">\n"}
-{"source": "dsp_attribut.cfm", "start": 50, "end": 50, "code": "\t\t\t\t<cfoutput group=\"pays_id\">\n"}
-{"source": "dsp_attribut.cfm", "start": 55, "end": 55, "code": "\t\t\t\t<cfoutput group=\"langue_id\">\n"}
-```
-
-### Color Group Management Logic
-*Explanation:*  
-Color groups allow grouping color attribute options for better organization. The module manages creation, update, deletion, and display of these groups with their multilingual properties.
-
-Constraints:  
-- Multilingual management of labels and colors.  
-- Validation of required fields (color, order, language).  
-- Association to color attribute options.  
-- Dedicated interface for group management.
-
-```coldfusion
-{"source": "act_color_group.cfm", "start": 3, "end": 3, "code": "<cfif fuseaction eq \"updateColorGroup\">\n"}
-{"source": "act_color_group.cfm", "start": 6, "end": 6, "code": "<cfset qry_name = \"qry_color_group_search\">\n"}
-{"source": "dsp_color_group.cfm", "start": 18, "end": 18, "code": "<cfoutput>\n"}
-{"source": "dsp_color_group_add.cfm", "start": 4, "end": 4, "code": "<cfif ATTRIBUTES.FUSEACTION IS \"new\">\n"}
-{"source": "dsp_color_group_search.cfm", "start": 3, "end": 3, "code": "<cfset FIELDLIST = \"Crit1_Value,Crit2_Value,Crit3_Value,Crit4_Value,Crit5_Value\">\n"}
-```
-
----
-
-This documentation summarizes the essential business logic of the Product Attribute Management module, facilitating understanding and maintenance by Solusquare ColdFusion technical teams.
+<CFQUERY NAME="qry_type_produit_sans_at

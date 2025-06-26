@@ -1,12 +1,13 @@
 ---
+---
 title: "Index"
 ---
 
 # Product Attribute Management
 
-This module allows you to create, manage, and associate multilingual product attributes with product types, including advanced management of options, colors, and filters in Solusquare Commerce Cloud.
+This module allows for the creation, management, and association of multilingual product attributes to product types, including advanced management of options, colors, and filters in Solusquare Commerce Cloud.
 
-## Table of Contents:
+## Summary:
 
 - [Technical Documentation](./doc_tech)  
   Technical details, SQL queries, functions, and error handling.
@@ -15,4 +16,4 @@ This module allows you to create, manage, and associate multilingual product att
   Functional overview, user interface, and best practices.
 
 - [TroubleShooting & FAQ](./trouble_faq)  
-  Resolving common errors and answers to frequently asked questions.
+  Resolution of common errors and answers to frequently asked questions.
